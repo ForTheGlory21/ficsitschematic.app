@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FICSIT Schematic Planner</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='3' width='26' height='26' rx='7' fill='%23f5a524'/><path d='M10 22V10h12' stroke='%23111' stroke-width='3.2' fill='none' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=101">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-select" viewBox="0 0 24 24"><path d="M5 3l14 8-6 2-3 6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-belt" viewBox="0 0 24 24"><rect x="2.5" y="8" width="19" height="8" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5l2 1.5-2 1.5M12.5 10.5l2 1.5-2 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pipe" viewBox="0 0 24 24"><path d="M3 8h9a4 4 0 014 4v9M3 13h9a1 1 0 011 1v7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M18 5.5c1.4 1.6 2 2.6 2 3.5a2 2 0 01-4 0c0-.9.6-1.9 2-3.5z" fill="currentColor"/></symbol>
+    <symbol id="i-delete" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13M10 11v5M14 11v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 010 12h-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M15 14l5-5-5-5M20 9H10a6 6 0 000 12h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-1 .7-1.5 1.2-1.5 2.5M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 12h16M12 4v16" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="currentColor"/></symbol>
+    <symbol id="i-schem" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 6.5h4a3 3 0 013 3V14" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 11L12 4l8.5 7M6 9.5V20h4.5v-5.5h3V20H18V9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<section id="stage">
+  <canvas id="cv" tabindex="0"></canvas>
+  <div id="tip"></div>
+</section>
+
+<!-- top-left: brand + file menu -->
+<header id="brand" class="glass">
+  <button class="icon-btn" id="btn-home" title="Home: your factories"><svg><use href="#i-home"/></svg></button>
+  <div class="title"><b>FICSIT</b> Schematic<span>Factory planner</span></div>
+  <div class="menu-wrap">
+    <button class="icon-btn" id="btn-file" title="File"><svg><use href="#i-menu"/></svg></button>
+    <div id="filemenu" class="menu">
+      <button id="btn-home2" onclick="SF.home.show()">Home — your factories</button>
+      <hr>
+      <button id="btn-new">New factory</button>
+      <button id="btn-open">Open file…</button>
+      <button id="btn-save" title="Your factory saves itself; this downloads a copy as a file">Export file <kbd>Ctrl S</kbd></button>
+      <hr>
+      <button id="btn-share">Share link…</button>
+      <button id="btn-unlocks">Game progress…</button>
+      <button id="btn-png">Export PNG</button>
+      <hr>
+      <div class="submenu-wrap">
+        <button class="has-sub">Example &amp; test factories<span>›</span></button>
+        <div class="menu submenu">
+          <div class="menu-h">Opens as a new factory</div>
+          <button id="btn-example">Example factory</button>
+          <button id="btn-tower" title="Foundations, stacked walls and conveyor lifts across 3 storeys">3-storey building</button>
+          <div class="menu-h">Stress tests</div>
+          <div id="scenario-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- top-centre: tools -->
+<nav id="toolbar" class="glass">
+  <button class="icon-btn" id="btn-undo" title="Undo (Ctrl+Z)"><svg><use href="#i-undo"/></svg></button>
+  <button class="icon-btn" id="btn-redo" title="Redo (Ctrl+Y)"><svg><use href="#i-redo"/></svg></button>
+  <span class="sep"></span>
+  <div id="tools">
+    <button data-tool="select" title="Select / move (V)"><svg><use href="#i-select"/></svg><span>Select</span></button>
+    <button data-tool="link" data-kind="belt" title="Conveyor belt (B)"><svg><use href="#i-belt"/></svg><span>Belt</span></button>
+    <button data-tool="link" data-kind="pipe" title="Pipeline (P)"><svg><use href="#i-pipe"/></svg><span>Pipe</span></button>
+    <button data-tool="delete" title="Delete (X)"><svg><use href="#i-delete"/></svg><span>Delete</span></button>
+  </div>
+  <span class="sep"></span>
+  <div id="tiers"></div>
+  <span class="sep"></span>
+  <div id="modes" title="Switch between 2D and 3D (T)"><button data-mode="2d" class="on">2D</button><button data-mode="3d">3D</button></div>
+</nav>
+
+<!-- sim mode: time controls -->
+<div id="simbar" class="glass">
+  <div id="runmode" title="Free run: instant steady-state rates. Sim: real items, real crafting cycles, buffers fill from empty (M)"><button data-run="free" class="on">Free run</button><button data-run="sim">Sim</button></div>
+  <div id="simctl" hidden>
+  <button class="icon-btn" id="sim-reset" title="Reset to t = 0 (everything empty)">⏮</button>
+  <button class="icon-btn" id="sim-play" title="Play / pause (Space)">⏸</button>
+  <button class="icon-btn" id="sim-step" title="Step 1 second">⏭</button>
+  <div id="sim-speed" title="Simulation speed"><button data-sp="1" class="on">1×</button><button data-sp="4">4×</button><button data-sp="16">16×</button><button data-sp="64">64×</button></div>
+  <span class="sep"></span>
+  <div class="menu-wrap" id="skip-wrap">
+    <button class="icon-btn" id="sim-skip" title="Skip ahead: fast-forward the simulation to a time">⏩</button>
+    <div id="skipmenu" class="menu">
+      <div class="menu-h">Skip to</div>
+      <div class="skipgrid">
+        <button data-t="300">5m</button><button data-t="600">10m</button><button data-t="1200">20m</button>
+        <button data-t="1800">30m</button><button data-t="2700">45m</button><button data-t="3600">1h</button>
+        <button data-t="7200">2h</button><button data-t="36000">10h</button><button data-t="86400">24h</button>
+      </div>
+      <div class="muted small">Runs the full simulation as fast as your computer can. Earlier times restart from 0:00:00.</div>
+    </div>
+  </div>
+  <span id="sim-clock">0:00:00</span>
+  <span class="sep"></span>
+  <span id="sim-items" title="Items currently on belts"></span>
+  <span class="sep"></span>
+  <span id="sim-power" title="Power used / generated (informational only — machines always run)"></span>
+  <canvas id="sim-graph" width="120" height="30" title="Power over the last 10 sim minutes: generated (green) vs used (amber)"></canvas>
+  </div>
+</div>
+
+<!-- top-right: floors + view -->
+<div id="topright" class="glass">
+  <div id="levels">
+    <svg class="lead"><use href="#i-layers"/></svg>
+    <button class="icon-btn sm" id="lvl-down" title="Floor below (PgDn)">‹</button>
+    <select id="lvl" title="Floor"></select>
+    <button class="icon-btn sm" id="lvl-up" title="Floor above (PgUp) — creates one at the top">›</button>
+    <button class="icon-btn sm" id="lvl-ren" title="Rename floor">✎</button>
+  </div>
+  <span class="sep"></span>
+  <label class="snap" title="Grid snap"><svg><use href="#i-grid"/></svg><select id="snap"><option value="0">Free</option><option value="0.5">0.5 m</option><option value="1">1 m</option><option value="2">2 m</option><option value="4">4 m</option><option value="8">8 m</option></select></label>
+  <button class="icon-btn" id="btn-fit" title="Fit view (F)"><svg><use href="#i-fit"/></svg></button>
+  <div class="menu-wrap">
+    <button class="icon-btn" id="btn-view" title="View options"><svg><use href="#i-eye"/></svg></button>
+    <div id="viewmenu" class="menu right">
+      <div class="menu-h">Display</div>
+      <label class="tog"><input type="checkbox" data-set="grid"><i></i>Grid</label>
+      <label class="tog"><input type="checkbox" data-set="anim"><i></i>Animations</label>
+      <label class="tog"><input type="checkbox" data-set="labels"><i></i>Labels</label>
+      <label class="tog"><input type="checkbox" data-set="showRates"><i></i>Belt rates</label>
+      <label class="tog" title="Off: plain boxes (fastest)"><input type="checkbox" data-set="models3d"><i></i>3D building models (cubes)</label>
+      <label class="slide" title="How strongly other visible floors show behind the current one in 2D">Other floors in 2D<input type="range" id="ghost-op" min="0.05" max="0.7" step="0.01"><span id="ghost-op-v"></span></label>
+      <div class="menu-h">Behaviour</div>
+      <label class="slide">New belt style<select id="belt-style"><option value="curve">Default (smooth)</option><option value="ortho">Straight (90° turns)</option><option value="straight">Curve (arcs)</option></select></label>
+      <label class="tog" title="Free run only. Off: open belt ends and unconnected outputs discard items so unfinished lines keep running. On: they back up like in game. Sim mode always backs up like the game."><input type="checkbox" data-set="openOutputsBlock"><i></i>Open ends back up (Free run)</label>
+    </div>
+  </div>
+  <button class="icon-btn" id="btn-help" title="Help & shortcuts"><svg><use href="#i-help"/></svg></button>
+</div>
+
+<!-- left: build palette -->
+<aside id="left" class="glass">
+  <div id="rail"></div>
+  <div class="pal-main">
+    <div class="search"><svg><use href="#i-search"/></svg><input id="search" type="search" placeholder="Search buildings or products…" autocomplete="off"></div>
+    <div id="pal-title"></div>
+    <div id="matbar"></div>
+    <div id="palette"></div>
+  </div>
+</aside>
+
+<!-- right: inspector -->
+<aside id="right" class="glass">
+  <nav class="tabs">
+    <button data-tab="inspect" class="on">Inspector</button>
+    <button data-tab="factory">Factory</button>
+    <button data-tab="planner" title="Production calculator: what it takes to make X per minute">Planner</button>
+    <button data-tab="issues">Issues <span id="issue-count" class="badge"></span></button>
+  </nav>
+  <div id="tab-inspect" class="tab on"></div>
+  <div id="tab-factory" class="tab"></div>
+  <div id="tab-planner" class="tab"></div>
+  <div id="tab-issues" class="tab"></div>
+</aside>
+
+<div id="floors" class="glass" title="Floors — Alt+scroll, PgUp/PgDn or E/C to switch"></div>
+<div id="floorbanner"></div>
+<canvas id="mini" width="440" height="280"></canvas>
+<div id="hint"></div>
+<footer id="status" class="glass">
+  <span id="st-sim"></span><span class="dotsep"></span><span id="st-count"></span><span class="dotsep"></span><span id="st-pos"></span><span class="dotsep"></span><span id="st-zoom"></span>
+</footer>
+<div id="simreport" class="glass" hidden></div>
+<div id="toasts"></div>
+<input type="file" id="file-in" accept=".json" hidden>
+
+<script src="data.js?v=43"></script>
+<script src="icons.js?v=42"></script>
+<script src="models_cubes/index.js?v=3"></script>
+<script src="model_meta.js?v=1"></script>
+<script src="js/defs.js?v=90"></script>
+<script src="js/model.js?v=94"></script>
+<script src="js/store.js?v=1"></script>
+<script src="js/progress.js?v=2"></script>
+<script src="js/calc.js?v=1"></script>
+<script src="js/sim.js?v=91"></script>
+<script src="js/livesim.js?v=91"></script>
+<script src="js/render.js?v=90"></script>
+<script src="js/editor.js?v=92"></script>
+<script src="js/example.js?v=44"></script>
+<script src="js/scenarios.js?v=56"></script>
+<script src="js/ui.js?v=99"></script>
+<script src="js/planner.js?v=5"></script>
+<script src="js/home.js?v=5"></script>
+<script src="vendor/three.min.js"></script>
+<script src="js/view3d.js?v=98"></script>
+<script src="js/main.js?v=43"></script>
+</body>
+</html>

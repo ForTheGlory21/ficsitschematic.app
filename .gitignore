@@ -1,0 +1,14 @@
+# Game-derived working files: kept on this computer, never published
+Custom/
+_game_models/
+_pruned*/
+_backup/
+
+# Local tool and editor files
+.claude/
+__pycache__/
+*.pyc
+*.blend1
+node_modules/
+.DS_Store
+Thumbs.db

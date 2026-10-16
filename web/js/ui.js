@@ -981,16 +981,16 @@
     const lift = ea.level !== eb.level ? `<p>Crosses floors: ${h(S.levels[ea.level].name)} → ${h(S.levels[eb.level].name)} (lift).</p>` : '';
     return `<div class="ins-h" style="--c:${l.kind === 'pipe' ? '#38bdf8' : '#f59e0b'}"><div><div class="t">${h(spec.name)}</div><div class="s">${h(SF.defs[ea.def].name)} → ${h(SF.defs[eb.def].name)} · ${fmt(len, 1)} m</div></div></div>
       <div class="actions icons"><button data-act="lreset" title="Straighten: remove bend points">↺<span>Reset route</span></button><button data-act="ldel" class="danger" title="Delete">🗑<span>Delete</span></button></div>
+      <div class="row"><label>Style</label><div class="seg" id="i-style">${SF.BELT_STYLES.map(([v, n]) => `<button data-v="${v}" class="${SF.linkStyle(l) === v ? 'on' : ''}">${n}</button>`).join('')}</div></div>
       <div class="row"><label>Tier</label><div class="seg" id="i-tier">${list.map(b => `<button data-v="${b.tier}" class="${b.tier === l.tier ? 'on' : ''}" title="${b.rate}/min">Mk${b.tier}</button>`).join('')}</div><div class="sub">${spec.rate} ${l.kind === 'pipe' ? 'm³' : 'items'}/min</div></div>
       ${SF.linkProblems(l).map(p => `<div class="bad small">⚠ ${h(p.text)}</div>`).join('')}
       ${lift}<div id="ins-stats"></div>
-      ${fold('route', 'Route & shape', `<div class="row"><label>Style</label><div class="seg" id="i-style">${SF.BELT_STYLES.map(([v, n]) => `<button data-v="${v}" class="${SF.linkStyle(l) === v ? 'on' : ''}">${n}</button>`).join('')}</div>
-        <div class="sub">${(() => {
+      ${fold('route', 'Route details', `<div class="sub">${(() => {
           const P3 = SF.linkPath3D(l), probs = SF.linkProblems(l), r = SF.pathMinRadius(P3);
           const facts = `Tightest turn ${r === Infinity ? 'none' : fmt(r, 1) + ' m'} · steepest ${fmt(Math.atan(SF.pathMaxSlope(P3)) * 180 / Math.PI, 0)}°`;
           return facts + (probs.length ? '' : ' · <span class="good">buildable in game</span>');
-        })()}</div></div>
-      <p class="muted small">${(l.pts || []).length} bend point(s). Double-click the belt to add one; drag the handles to move; double-click a handle to remove it.</p>`, SF.BELT_STYLES.find(([v]) => v === SF.linkStyle(l))?.[1] || '')}
+        })()}</div>
+      <p class="muted small">${(l.pts || []).length} bend point(s). Double-click the belt to add one; drag the handles to move; double-click a handle to remove it.</p>`, (l.pts || []).length ? (l.pts || []).length + ' bends' : '')}
       ${spec.cost && spec.cost.length ? fold('lcost', 'Cost per segment', `<div class="costs">${costHTML(spec.cost)}</div>`) : ''}`;
   }
 

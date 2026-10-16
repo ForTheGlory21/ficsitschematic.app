@@ -4,7 +4,7 @@ An unofficial factory planner for **Satisfactory**, in your browser. Lay factori
 footprints in 2D, look at them in 3D, and run them: the planner works out every belt rate and
 machine's efficiency, or simulates every item in real time.
 
-**Live site:** https://ficsitschematic.app <!-- update if the address changes -->
+**Live site:** https://ficsitschematic.app
 
 > Unofficial fan-made tool, not affiliated with or endorsed by Coffee Stain Studios.
 > Satisfactory and its game assets belong to Coffee Stain Studios.

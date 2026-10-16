@@ -1,10 +1,9 @@
-# Publishes the web/ folder to GitHub Pages on every push to main.
-# One-time setup on GitHub: Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+# Publishes the web/ folder to GitHub Pages with GitHub Actions. Run by hand (Actions -> Publish website ->
+# Run workflow) with Settings -> Pages -> Source: "GitHub Actions".
+# The site is normally published from the gh-pages branch instead (see README: Publishing), which needs no Actions.
 name: Publish website
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

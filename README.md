@@ -60,6 +60,21 @@ docs/HOW-IT-WORKS.md  how the code fits together, for anyone who wants to change
 .github/workflows/    publishes web/ to GitHub Pages on every push to main
 ```
 
+## Publishing
+
+The live site is served by GitHub Pages from the `gh-pages` branch, which holds just the contents
+of `web/` (Settings → Pages → Source: *Deploy from a branch*, `gh-pages`, `/ (root)`). To publish
+your latest commit on `main`:
+
+```
+git push origin main
+git push origin $(git subtree split --prefix web main):refs/heads/gh-pages --force
+```
+
+The second line copies `web/` into `gh-pages`. That branch is generated, so overwriting it is
+expected. The site updates about a minute later. `.github/workflows/pages.yml` is an alternative
+that uses GitHub Actions instead (run it by hand).
+
 ## Tests
 
 ```
